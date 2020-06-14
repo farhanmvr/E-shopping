@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../screens/orders_screen.dart';
+import '../screens/user_products_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -17,7 +18,7 @@ class AppDrawer extends StatelessWidget {
             ),
             automaticallyImplyLeading: false,
           ),
-          Divider(),
+          SizedBox(height: 20,),
           ListTile(
             leading: Icon(Icons.shop),
             title: Text('Shop'),
@@ -30,7 +31,15 @@ class AppDrawer extends StatelessWidget {
               Navigator.of(context).pop();
               Navigator.pushNamed(context, OrdersScreen.routeName);
             },
-          )
+          ),
+          ListTile(
+            leading: Icon(Icons.add_to_home_screen),
+            title: Text('My Products'),
+            onTap: () {
+              Navigator.of(context).pop();
+              Navigator.pushNamed(context, UserProductsScreen.routeName);
+            },
+          ),
         ],
       ),
     );
