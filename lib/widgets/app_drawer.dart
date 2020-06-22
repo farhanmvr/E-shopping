@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../screens/orders_screen.dart';
 import '../screens/user_products_screen.dart';
 import '../providers/auth.dart';
+import '../helpers/custom_route.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -20,7 +21,9 @@ class AppDrawer extends StatelessWidget {
             ),
             automaticallyImplyLeading: false,
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           ListTile(
             leading: Icon(Icons.shop),
             title: Text('Shop'),
@@ -32,6 +35,8 @@ class AppDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pop();
               Navigator.pushNamed(context, OrdersScreen.routeName);
+              // Navigator.of(context).push(
+              //     CustomRoute(builder: (ctx) => OrdersScreen()));
             },
           ),
           ListTile(
@@ -48,7 +53,7 @@ class AppDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).pushReplacementNamed('/');
-              Provider.of<Auth>(context,listen: false).logout();
+              Provider.of<Auth>(context, listen: false).logout();
             },
           ),
         ],

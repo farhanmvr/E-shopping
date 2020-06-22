@@ -13,6 +13,7 @@ import './providers/products_provider.dart';
 import './providers/cart.dart';
 import './providers/orders.dart';
 import './providers/auth.dart';
+import './helpers/custom_route.dart';
 
 void main() {
   runApp(MyApp());
@@ -47,14 +48,25 @@ class MyApp extends StatelessWidget {
             title: 'E-Shopping',
             debugShowCheckedModeBanner: false,
             theme: ThemeData(
-                primarySwatch: Colors.purple,
-                accentColor: Colors.redAccent,
-                fontFamily: 'Lato'),
+              primarySwatch: Colors.purple,
+              accentColor: Colors.redAccent,
+              fontFamily: 'Lato',
+              pageTransitionsTheme: PageTransitionsTheme(
+                builders: {
+                  TargetPlatform.android: CustomPageTransitionBuilder(),
+                  TargetPlatform.iOS: CustomPageTransitionBuilder(),
+                },
+              ),
+            ),
             home: authData.isAuth
                 ? ProductsOverviewScreen()
                 : FutureBuilder(
                     future: authData.tryAutoLogin(),
-                    builder: (ctx, authResultSnapshot) => authResultSnapshot.connectionState == ConnectionState.waiting ? SplashScreen() : AuthScreen(),
+                    builder: (ctx, authResultSnapshot) =>
+                        authResultSnapshot.connectionState ==
+                                ConnectionState.waiting
+                            ? SplashScreen()
+                            : AuthScreen(),
                   ),
             routes: {
               ProductDetailScreen.routName: (ctx) => ProductDetailScreen(),
